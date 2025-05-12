@@ -80,6 +80,24 @@ function yesno() {
     done
 }
 
+log "INFO" "Welcome to the PlayNix Flake installer!"
+log "INFO" "The installer will log the installation process to $LOGFILE."
+
+log "WARN" "This script will irreversibly format the *entire* target disk!
+
+The following partitions will be created:
+
+    - 1GB EFI System Partition      → /boot (label: NIXBOOT)
+    - Custom-size Linux swap        → used as system swap (label: SWAP)
+    - 100GB ext4 partition          → /persist  (label: PERSIST)
+    - 700GB ext4 partition          → /home     (label: HOME)
+    - Remaining space (ext4)        → /nix      (label: NIX)
+
+Additionally:
+    - The root (/) filesystem will be mounted as tmpfs (RAM) at boot
+    - Impermanence will persist selected state to /persist
+    - User and root passwords will be stored in /persist/etc/shadow.d"
+
 # Ensure required tools are present
 for cmd in blkdiscard sgdisk mkfs.ext4 mkfs.vfat mkswap swapon; do
     check_command "$cmd"
