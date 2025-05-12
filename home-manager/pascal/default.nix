@@ -21,6 +21,7 @@ in {
     ./modules/git.nix
     ./modules/dconf.nix
     ./modules/theme.nix
+    ./modules/artwork.nix
     ./modules/zsh.nix
     #./modules/thefuck.nix
     ./modules/plasma-manager.nix
