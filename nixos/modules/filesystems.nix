@@ -38,15 +38,16 @@
     };
 
     "/home" = {
-      device = "/persist/home";
-      fsType = "none";
-      options = [ "bind" ];
+      device = "/dev/disk/by-label/HOME";
+      fsType = "ext4";
+      options = [ "defaults" "noatime" "discard" "commit=60" "barrier=1" ];
     };
 
     "/nix" = {
-      device = "/persist/nix";
-      fsType = "none";
-      options = [ "bind" ];
+      device = "/dev/disk/by-label/NIX";
+      fsType = "ext4";
+      options = [ "defaults" "noatime" "discard" "commit=60" "barrier=1" ];
+      neededForBoot = true;
     };
 
     "/tmp" = {

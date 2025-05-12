@@ -111,13 +111,15 @@ fi
 
 BOOTDISK="${DISK}p1"
 SWAPDISK="${DISK}p2"
-ROOTDISK="${DISK}p3"
-PERSISTDISK="${DISK}p4"
+PERSISTDISK="${DISK}p3"
+HOMEDISK="${DISK}p4"
+NIXDISK="${DISK}p5"
 
 log "INFO" "Boot Partition: $BOOTDISK"
 log "INFO" "SWAP Partition: $SWAPDISK"
-log "INFO" "Root Partition: $ROOTDISK"
 log "INFO" "Persist Partition: $PERSISTDISK"
+log "INFO" "Home Partition: $HOMEDISK"
+log "INFO" "Nix Partition: $NIXDISK"
 
 log "INFO" "SWAP size selection"
 read -p "How much Swap Size do you want? Enter in GB: " SWAPSIZE
@@ -144,8 +146,9 @@ sgdisk -p "$DISK" > /dev/null
 log "INFO" "Creating partitions..." "$BLUE"
 sgdisk -n1:1M:+1G -t1:EF00 "$DISK"        # EFI boot
 sgdisk -n2:0:+${SWAPSIZE}G -t2:8200 "$DISK"  # Swap
-sgdisk -n3:0:+30G -t3:8300 "$DISK"           # 30 GB ext4 root
-sgdisk -n4:0:0 -t4:8300 "$DISK"     # rest for ext4 persist
+sgdisk -n3:0:+100G -t3:8300 "$DISK"  # 100 GB ext4 persist
+sgdisk -n4:0:+700G -t4:8300 "$DISK"  # 700 GB home ext4
+sgdisk -n5:0:0     -t5:8300 "$DISK"  # nix ext4 (rest of disk)
 
 sgdisk -p "$DISK" > /dev/null
 
@@ -156,6 +159,8 @@ mkswap -L SWAP "$SWAPDISK"
 swapon "$SWAPDISK"
 mkfs.ext4 -L NIXROOT "$ROOTDISK"
 mkfs.ext4 -L PERSIST "$PERSISTDISK"
+mkfs.ext4 -L HOME "$HOMEDISK"
+mkfs.ext4 -L NIX "$NIXDISK"
 
 log "INFO" "Notifying kernel of partition changes..."
 sgdisk -p "$DISK" > /dev/null
@@ -166,9 +171,8 @@ mount "$ROOTDISK" /mnt
 mkdir -p /mnt/boot
 mount "$BOOTDISK" /mnt/boot
 mount --mkdir "$PERSISTDISK" /mnt/persist
-mkdir -p /mnt/persist/home
-mkdir -p /mnt/persist/nix
-mkdir -p /mnt/persist/etc/shadow.d
+mount --mkdir "$HOMEDISK" /mnt/home
+mount --mkdir "$NIXDISK" /mnt/nix
 
 while true; do
     read -rp "Which host to install? (battlestation) " HOST
@@ -298,6 +302,7 @@ mkdir -p /mnt/persist/etc/
 cp /mnt/etc/machine-id /mnt/persist/etc/
 
 # setup ssh host key persistence
+mkdir -p /mnt/persist/etc/ssh
 cp /mnt/etc/ssh/ssh_host_ed25519_key /mnt/persist/etc/ssh/
 cp /mnt/etc/ssh/ssh_host_ed25519_key.pub /mnt/persist/etc/ssh/
 cp /mnt/etc/ssh/ssh_host_rsa_key /mnt/persist/etc/ssh/
