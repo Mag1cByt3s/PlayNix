@@ -108,6 +108,9 @@
             modules = [
               darkmatter-grub-theme.nixosModule
               inputs.impermanence.nixosModules.impermanence
+              (import "${inputs.nixos-hardware}/asus/rog-strix/x570e")
+              (import "${inputs.nixos-hardware}/common/gpu/amd")
+              (import "${inputs.nixos-hardware}/common/hidpi.nix")
 
               ./nixos/hosts/battlestation
               {

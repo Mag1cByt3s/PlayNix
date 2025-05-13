@@ -1,6 +1,12 @@
-{ config, pkgs, lib, ... }:
+{ 
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
+  # Switch to mesa-git
+  chaotic.mesa-git.enable = lib.mkForce true;
 
-{
   # Enable Steam
   programs.steam = {
     enable = true;
