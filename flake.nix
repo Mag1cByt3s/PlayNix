@@ -72,6 +72,10 @@
 
     # https://github.com/NixOS/nixos-hardware
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
+    # Nix Gaming for Steam platformOptimizations
+    # https://github.com/fufexan/nix-gaming
+    nix-gaming.url = "github:fufexan/nix-gaming";
   };
 
   outputs = { 
@@ -85,6 +89,7 @@
       plasma-manager, 
       darkmatter-grub-theme,
       nixos-hardware,
+      nix-gaming,
       ...
   } @ inputs: let
       inherit (self) outputs;
