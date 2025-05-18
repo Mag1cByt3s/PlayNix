@@ -46,6 +46,7 @@
               "storage"
               "video"
               "render"
+              "gamemode"
             ];
           };
         };
