@@ -13,5 +13,6 @@
     proton-ge-bin
     lutris
     heroic
+    itch
   ];
 }
