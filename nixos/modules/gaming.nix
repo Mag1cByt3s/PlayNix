@@ -25,6 +25,13 @@
     platformOptimizations.enable = true;
   };
 
+  # https://nixos.wiki/wiki/Games
+  # Adding programs.nix-ld = { enable = true; libraries = pkgs.steam-run.fhsenv.args.multiPkgs pkgs; }; to your configuration to run nearly any binary by including all of the libraries used by Steam. (https://old.reddit.com/r/NixOS/comments/1d1nd9l/walking_through_why_precompiled_hello_world/)
+  programs.nix-ld = { 
+    enable = true;
+    libraries = pkgs.steam-run.fhsenv.args.multiPkgs pkgs;
+  };
+
   # Enable Gamescope Compositor
   programs.gamescope = {
     enable = true;
