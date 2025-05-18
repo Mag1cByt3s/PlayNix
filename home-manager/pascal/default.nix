@@ -70,6 +70,8 @@ in {
     sessionVariables = {
       # This should be default soon
       MOZ_ENABLE_WAYLAND = 1;
+
+      STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\\\${HOME}/.steam/root/compatibilitytools.d";
     };
 
   };
