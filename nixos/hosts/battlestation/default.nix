@@ -3,6 +3,7 @@
   config,
   lib,
   pkgs,
+  chaotic,
   chaoticPkgs,
   inputs,
   isKVM,

@@ -1,12 +1,18 @@
-{ config, lib, pkgs, modulesPath, inputs, ... }:
-
-let
+{ 
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  inputs,
+  flakeSrc,
+  ...
+}: let
   background-package = pkgs.stdenvNoCC.mkDerivation {
     name = "background-image";
-    src = "${inputs.artwork}/wallpapers";
+    src = "${flakeSrc}/assets/wallpapers";
     dontUnpack = true;
     installPhase = ''
-      cp $src/Red-Flake-Wallpaper_1920x1080.png $out
+      cp $src/nixos-gruvbox-minimalism_3440x1440.jpg $out
     '';
   };
   browser = "firefox.desktop";
@@ -96,7 +102,8 @@ in
   systemd.services.accounts-daemon.serviceConfig.PrivateTmp = false;
 
   # set /etc/xdg/menus/applications-merged
-  environment.etc."xdg/menus/applications-merged/redflake-applications.menu".source = ./xdg/redflake-applications.menu;
+  # disable for now...
+  #environment.etc."xdg/menus/applications-merged/redflake-applications.menu".source = ./xdg/playnix-applications.menu;
 
   # Env Variables
   environment.sessionVariables = {

@@ -3,10 +3,16 @@
   inputs,
   pkgs,
   lib,
+  chaotic,
+  modulesPath,
   ...
-}: {
-  imports = [
-    inputs.nix-gaming.nixosModules.platformOptimizations
+}: let 
+  gaming = inputs.nix-gaming;
+in {
+  imports = with gaming.nixosModules; [
+    # https://github.com/fufexan/nix-gaming#platform-optimizations
+    pipewireLowLatency
+    platformOptimizations
   ];
 
   # Switch to mesa-git
@@ -19,17 +25,14 @@
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
     gamescopeSession.enable = true; # Enable Gamescope session
-
-    # https://github.com/fufexan/nix-gaming#platform-optimizations
-    # A bunch of optimizations for Steam from SteamOS
-    platformOptimizations.enable = true;
   };
 
   # https://nixos.wiki/wiki/Games
   # Adding programs.nix-ld = { enable = true; libraries = pkgs.steam-run.fhsenv.args.multiPkgs pkgs; }; to your configuration to run nearly any binary by including all of the libraries used by Steam. (https://old.reddit.com/r/NixOS/comments/1d1nd9l/walking_through_why_precompiled_hello_world/)
+  # FIX: error: expected a set but found a list: https://discourse.nixos.org/t/programs-nix-ld-libraries-expects-set-instead-of-list/56009/3?utm_source=chatgpt.com
   programs.nix-ld = { 
     enable = true;
-    libraries = pkgs.steam-run.fhsenv.args.multiPkgs pkgs;
+    libraries = pkgs.steam-run.args.multiPkgs pkgs;
   };
 
   # Enable Gamescope Compositor
@@ -42,6 +45,9 @@
   programs.gamemode = {
     enable = true;
   };
+
+  # see https://github.com/fufexan/nix-gaming/#pipewire-low-latency
+  services.pipewire.lowLatency.enable = true;
 
   environment.sessionVariables = {
     STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";

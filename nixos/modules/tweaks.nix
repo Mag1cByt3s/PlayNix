@@ -7,6 +7,6 @@
     DOTNET_ROOT = "${pkgs.dotnet-sdk}";
 
     # set AMD Vulkan driver to RADV
-    AMD_VULKAN_ICD = "RADV"
+    AMD_VULKAN_ICD = "RADV";
   };
 }

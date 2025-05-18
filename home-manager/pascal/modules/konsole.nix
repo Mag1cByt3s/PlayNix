@@ -1,8 +1,8 @@
 { config, lib, pkgs, ... }:
 {
     # deploy konsole profile
-    home.file.".local/share/konsole/red-flake.profile" = {
-      source = ./konsole/red-flake.profile;
+    home.file.".local/share/konsole/playnix.profile" = {
+      source = ./konsole/playnix.profile;
       recursive = false;
       force = true;
     };

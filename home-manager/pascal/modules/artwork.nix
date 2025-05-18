@@ -1,12 +1,13 @@
-{ config, lib, pkgs, inputs, ... }:
-
-let
-  wallpaperPath = ../../../../assets/wallpapers;
-in
 {
+  config,
+  pkgs,
+  lib,
+  flakeSrc,
+  ...
+}: {
   home.file.".local/share/wallpapers/playnix/" = {
-    source = wallpaperPath;
+    source    = "${flakeSrc}/assets/wallpapers";
     recursive = true;
-    force = true;
+    force     = true;
   };
 }

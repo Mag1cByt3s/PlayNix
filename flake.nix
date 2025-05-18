@@ -100,6 +100,7 @@
           # battlestation nixos host config
           battlestation = nixpkgs.lib.nixosSystem {
             inherit system;
+
             specialArgs = {
               inherit inputs outputs;
               chaoticPkgs = import inputs.nixpkgs {
@@ -109,10 +110,13 @@
               };
               user = "pascal";
               isKVM = false;
+              flakeSrc = self;
             };
+
             modules = [
               darkmatter-grub-theme.nixosModule
               inputs.impermanence.nixosModules.impermanence
+              chaotic.nixosModules.default
               (import "${inputs.nixos-hardware}/asus/rog-strix/x570e")
               (import "${inputs.nixos-hardware}/common/gpu/amd")
               (import "${inputs.nixos-hardware}/common/hidpi.nix")
@@ -127,6 +131,7 @@
                 home-manager.extraSpecialArgs = { 
                   inherit inputs;
                   user = "pascal";
+                  flakeSrc = self;
                   pkgs = import inputs.nixpkgs {
                     system = "x86_64-linux";
                     config.allowUnfree = true;
