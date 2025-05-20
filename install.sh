@@ -236,14 +236,8 @@ done
 
 # Set username based on chosen host
 case $HOST in
-    kvm | vmware )
-        USER="redflake"
-        ;;
-    t580 )
+    battlestation )
         USER="pascal"
-        ;;
-    vps )
-        USER="redcloud"
         ;;
     * )
         echo "Invalid host. Please select a valid host."
