@@ -29,7 +29,7 @@ in {
 
     extraCompatPackages = with pkgs; [
       proton-ge-bin # Enable Proton-GE
-    ]
+    ];
   };
 
   # https://nixos.wiki/wiki/Games
