@@ -175,7 +175,6 @@ log "INFO" "Formatting partitions..." "$BLUE"
 mkfs.vfat -n NIXBOOT "$BOOTDISK"
 mkswap -L SWAP "$SWAPDISK"
 swapon "$SWAPDISK"
-mkfs.ext4 -L NIXROOT "$ROOTDISK"
 mkfs.ext4 -L PERSIST "$PERSISTDISK"
 mkfs.ext4 -L HOME "$HOMEDISK"
 mkfs.ext4 -L NIX "$NIXDISK"
@@ -185,7 +184,6 @@ sgdisk -p "$DISK" > /dev/null
 sleep 5
 
 log "INFO" "Mounting partitions..." "$BLUE"
-mount "$ROOTDISK" /mnt
 mkdir -p /mnt/boot
 mount "$BOOTDISK" /mnt/boot
 mount --mkdir "$PERSISTDISK" /mnt/persist
