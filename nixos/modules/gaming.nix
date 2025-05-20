@@ -16,6 +16,7 @@ in {
   ];
 
   # Switch to mesa-git
+  chaotic.mesa-git.fallbackSpecialisation = lib.mkForce false;
   chaotic.mesa-git.enable = lib.mkForce true;
 
   # Enable Steam
