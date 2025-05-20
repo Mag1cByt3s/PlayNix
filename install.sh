@@ -290,15 +290,33 @@ sync
 log "INFO" "Setting up persistence..."
 mkdir -p /mnt/persist/var/lib/
 
+
 # setup NetworkManager persistence
+
+# Create the destination directory for NetworkManager configuration
 mkdir -p /mnt/persist/etc/NetworkManager
+
+# Check if the system-connections directory exists before copying
 if [ -d /etc/NetworkManager/system-connections ]; then
-    cp -r /etc/NetworkManager/system-connections /mnt/persist/etc/NetworkManager/
+    # Copy the directory recursively while preserving attributes
+    cp -r -p /etc/NetworkManager/system-connections /mnt/persist/etc/NetworkManager/
 fi
 
+# Create the destination directory for NetworkManager state files
 mkdir -p /mnt/persist/var/lib/NetworkManager
+
+# Check if the NetworkManager state directory exists
 if [ -d /var/lib/NetworkManager ]; then
-    cp /var/lib/NetworkManager/{secret_key,seen-bssids,timestamps} /mnt/persist/var/lib/NetworkManager/
+    # List of files to copy
+    files=("secret_key" "seen-bssids" "timestamps")
+    
+    # Loop through each file and copy only if it exists
+    for file in "${files[@]}"; do
+        if [ -f /var/lib/NetworkManager/$file ]; then
+            # Copy the file while preserving attributes
+            cp -p /var/lib/NetworkManager/$file /mnt/persist/var/lib/NetworkManager/
+        fi
+    done
 fi
 
 # setup ssl certs persistence
@@ -324,8 +342,11 @@ umount -f /mnt/boot
 log "INFO" "Unmouting /mnt/persist"
 umount -f /mnt/persist
 
-log "INFO" "Unmouting /mnt"
-umount -f /mnt
+log "INFO" "Unmouting /mnt/home"
+umount -f /mnt/home
+
+log "INFO" "Unmouting /mnt/nix"
+umount -f /mnt/nix
 
 log "INFO" "Installation finished. It is now safe to reboot."
 
