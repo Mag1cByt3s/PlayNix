@@ -64,6 +64,18 @@ in {
       meslo-lgs-nf
       thefuck
       flatpak
+
+      # gaming related package
+      mangohud
+      steam-run
+      steamtinkerlaunch
+      steam-rom-manager
+      umu-launcher
+      protonup-qt
+      protonup-ng
+      lutris
+      heroic
+      itch
     ];
 
     # set user session variables

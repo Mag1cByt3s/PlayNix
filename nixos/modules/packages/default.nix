@@ -47,6 +47,6 @@
     ./file-transfer.nix
 
     # Gaming related programs
-    ./gaming.nix
+    #./gaming.nix
   ];
 }
