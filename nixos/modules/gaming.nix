@@ -26,6 +26,10 @@ in {
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
     gamescopeSession.enable = true; # Enable Gamescope session
+
+    extraCompatPackages = with pkgs; [
+      proton-ge-bin # Enable Proton-GE
+    ]
   };
 
   # https://nixos.wiki/wiki/Games

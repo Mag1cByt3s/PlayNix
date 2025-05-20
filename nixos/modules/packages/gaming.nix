@@ -11,7 +11,6 @@
     umu-launcher
     protonup-qt
     protonup-ng
-    proton-ge-bin
     lutris
     heroic
     itch
