@@ -78,8 +78,8 @@
                   "applications:vesktop.desktop"
                   "applications:codium.desktop"
                   "applications:steam.desktop"
-                  "applications:heroic.desktop"
-                  "applications:lutris.desktop"
+                  "applications:com.heroicgameslauncher.hgl.desktop"
+                  "applications:net.lutris.Lutris.desktop"
                   "applications:itch.desktop"
                   "applications:protonup-qt.desktop"
                 ];
