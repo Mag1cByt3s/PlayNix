@@ -6,6 +6,11 @@
   inputs,
   ... 
 }: {
+  boot.kernelModules = [ 
+    "i2c-dev"
+    "i2c-piix4" 
+  ];
+
   hardware = {
     # enable firmware with a license allowing redistribution
     enableRedistributableFirmware = lib.mkForce true;

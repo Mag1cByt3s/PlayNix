@@ -70,6 +70,9 @@
 
     # Gaming related settings
     ../../modules/gaming.nix
+
+    # OpenRGB settings
+    ../../modules/openrgb.nix
   ];
 
   # Set hostname
