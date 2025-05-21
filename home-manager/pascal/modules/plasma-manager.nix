@@ -77,11 +77,11 @@
                   "applications:org.telegram.desktop.desktop"
                   "applications:vesktop.desktop"
                   "applications:codium.desktop"
-                  "applications:burpsuite.desktop"
-                  "applications:bloodhound.desktop"
-                  "applications:ghidra.desktop"
-                  #"applications:re.rizin.cutter.desktop"
-                  "applications:org.wireshark.Wireshark.desktop"
+                  "applications:steam.desktop"
+                  "applications:heroic.desktop"
+                  "applications:lutris.desktop"
+                  "applications:itch.desktop"
+                  "applications:protonup-qt.desktop"
                 ];
               };
             };
