@@ -57,7 +57,7 @@
           {
             name = "org.kde.plasma.kickoff";
             config = {
-              General.icon = "${config.home.homeDirectory}/.red-flake/artwork/logos/RedFlake_Logo_32x32px.png";
+              General.icon = "${config.home.homeDirectory}/.local/share/icons/playnix/nix-snowflake-rainbow.svg";
             };
           }
           # Adding configuration to the widgets can also for example be used to

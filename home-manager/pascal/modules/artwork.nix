@@ -10,4 +10,10 @@
     recursive = true;
     force     = true;
   };
+
+  home.file.".local/share/icons/playnix/" = {
+    source    = "${flakeSrc}/assets/icons";
+    recursive = true;
+    force     = true;
+  };
 }
