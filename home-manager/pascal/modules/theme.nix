@@ -28,7 +28,7 @@
   };
 
   # force creation of ~/.config/gtk-2.0/gtkrc otherwise home-manager will fail
-  home.file.${config.gtk.gtk2.configLocation}.force = true;
+  home.file.${config.gtk.gtk2.configLocation}.force = lib.mkForce true;
 
   # force creation of ~/.config/gtk-3.0/settings.ini otherwise home-manager will fail
   xdg.configFile."gtk-3.0/settings.ini".force = true;
