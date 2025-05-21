@@ -30,7 +30,6 @@
 
     # wine
     wine
-    wineWowPackages.stable
     winetricks
     wineWowPackages.waylandFull
     bottles
