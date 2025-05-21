@@ -33,11 +33,15 @@ in {
     ./modules/flatpak.nix
     ./modules/xdg.nix
     ./modules/ssh-agent.nix
+    ./modules/packages.nix
   ];
 
+  # Pass homePkgs to all imported modules
+  _module.args = {
+    inherit homePkgs;
+  };
 
   home = {
-
     # set username
     username = "${user}";
 
@@ -50,34 +54,6 @@ in {
     # disable warning about mismatched version between Home Manager and Nixpkgs
     enableNixpkgsReleaseCheck = false;
 
-    # set user packages
-    packages = with homePkgs; [
-      papirus-icon-theme
-      bibata-cursors
-      sweet-nova
-      oh-my-zsh
-      zsh-autosuggestions
-      zsh-completions
-      nix-zsh-completions
-      zsh-syntax-highlighting
-      zsh-powerlevel10k
-      meslo-lgs-nf
-      thefuck
-      flatpak
-
-      # gaming related package
-      mangohud
-      steam-run
-      steamtinkerlaunch
-      steam-rom-manager
-      umu-launcher
-      protonup-qt
-      protonup-ng
-      lutris
-      heroic
-      itch
-    ];
-
     # set user session variables
     sessionVariables = {
       # This should be default soon
@@ -85,9 +61,7 @@ in {
 
       STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\\\${HOME}/.steam/root/compatibilitytools.d";
     };
-
   };
-
 
   # enable xsession
   xsession.enable = true;
@@ -95,5 +69,4 @@ in {
   # this is required for NixOS home-manager to work!
   # let NixOS manage home-manager
   programs.home-manager.enable = false;
-
 }

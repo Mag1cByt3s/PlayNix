@@ -41,7 +41,7 @@
     ./remote-access.nix
 
     # Wine
-    ./wine.nix
+    #./wine.nix
 
     # Programs for file transfer
     ./file-transfer.nix
