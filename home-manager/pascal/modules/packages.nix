@@ -29,10 +29,7 @@
     itch
 
     # wine
-    #wine
-    #wineWowPackages.stable
     winetricks
-    wineWowPackages.waylandFull
     wineWow64Packages.waylandFull
     bottles
   ];
