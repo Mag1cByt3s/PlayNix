@@ -47,6 +47,7 @@
               "video"
               "render"
               "gamemode"
+              "openrazer"
             ];
           };
         };

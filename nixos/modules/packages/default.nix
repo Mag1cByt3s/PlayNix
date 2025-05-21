@@ -48,5 +48,8 @@
 
     # Gaming related programs
     #./gaming.nix
+
+    # Razer programs
+    ./razer.nix
   ];
 }

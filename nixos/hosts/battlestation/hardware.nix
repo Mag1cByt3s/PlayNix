@@ -23,5 +23,8 @@
 
     # enable non-root access to qmk firmware
     keyboard.qmk.enable = lib.mkForce true;
+
+    # enable openrazer
+    openrazer.enable = lib.mkForce true;
   };
 }
