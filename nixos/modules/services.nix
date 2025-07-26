@@ -38,8 +38,10 @@
   services.timesyncd.enable = true;
 
   # Enable profile-sync-daemon
-  services.psd.enable = true;
-  services.psd.resyncTimer = "30min";
+  services.psd = {
+    enable = true;
+    resyncTimer = "30min";
+  };
 
   # Enable Flatpak support
   services.flatpak.enable = true;

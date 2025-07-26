@@ -134,6 +134,9 @@ in
     login.kwallet = {
       enable = true;
     };
+    sddm.kwallet = {
+      enable = true;
+    };
     kde.kwallet = {
       enable = true;
     };
