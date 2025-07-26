@@ -56,9 +56,9 @@
       options = [
         "size=1G"
         "mode=1777"
-        "noexec"
         "nodev"
         "nosuid"
+        "noatime"
       ];
     };
   };

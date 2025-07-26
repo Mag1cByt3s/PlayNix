@@ -19,21 +19,15 @@
     lsb-release
     socat
     rlwrap
-    thefuck
     dfc
     zsh
     openvpn
     macchanger
-    soapui
     ghex
     jq
     ntp
-    redis
     imagemagick
     strace
-    clamav
-    # xsser broken at the moment due to python nose
-    #xsser
     lsd
     bat
     man
@@ -60,6 +54,5 @@
     e2fsprogs
     tldr
     sshpass
-    python312Packages.pyhanko
   ];
 }

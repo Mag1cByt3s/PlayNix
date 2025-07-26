@@ -13,7 +13,6 @@
     zsh-syntax-highlighting
     zsh-powerlevel10k
     meslo-lgs-nf
-    thefuck
     flatpak
 
     # gaming related package

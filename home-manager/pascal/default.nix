@@ -23,7 +23,6 @@ in {
     ./modules/theme.nix
     ./modules/artwork.nix
     ./modules/zsh.nix
-    #./modules/thefuck.nix
     ./modules/plasma-manager.nix
     ./modules/kwallet.nix
     ./modules/konsole.nix
