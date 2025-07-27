@@ -30,4 +30,18 @@
         ExecStart = "${pkgs.bash}/bin/bash -c 'echo 1 | tee /sys/devices/system/cpu/cpu*/cpufreq/boost'";
       };
     };
+
+    # Enable LAVD scheduler via NixOS's scx module
+    services.scx = {
+      enable = true;
+      scheduler = "scx_lavd";
+      # Optional: Customize mode/args for gaming performance
+      extraOptions = [
+        "--performance"  # Bias toward low latency (gaming-focused)
+        "--core-compaction"  # Explicitly enable power-saving compaction
+      ];
+    };
+
+    # Disable conflicting services (e.g., ananicy-cpp)
+    services.ananicy.enable = lib.mkForce false;  # Avoid priority conflicts with LAVC scx scheduler
 }
