@@ -52,21 +52,6 @@
 
           # sched-ext class for LAVD/SCX support
           SCHED_CLASS_EXT = yes;
-
-          # Preserve Xanmod's key tweaks (e.g., performance governor, BBRv3, full preemption)
-          # These are already set in the base config, but we can reinforce if needed
-          CPU_FREQ_DEFAULT_GOV_PERFORMANCE = mkOverride 60 yes;
-          CPU_FREQ_DEFAULT_GOV_SCHEDUTIL = mkOverride 60 no;
-          PREEMPT = mkOverride 60 yes;
-          PREEMPT_VOLUNTARY = mkOverride 60 no;
-          TCP_CONG_BBR = yes;
-          DEFAULT_BBR = yes;
-          RCU_EXPERT = yes;
-          RCU_FANOUT = freeform "64";
-          RCU_FANOUT_LEAF = freeform "16";
-          RCU_BOOST = yes;
-          RCU_BOOST_DELAY = freeform "0";
-          RCU_EXP_KTHREAD = yes;
         };
         ignoreConfigErrors = true;  # Skip minor config warnings during build
       };
