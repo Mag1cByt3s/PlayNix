@@ -36,6 +36,9 @@
         # increase this value to 1 or 2 if you are using physical swap (1 if ssd, 2 if hdd)
         "vm.page-cluster" = 0;  # Set to 0 for SSD
 
+        # hugepages
+        "vm.nr_hugepages" = 512;  # 1GB of hugepages (adjust based on RAM usage; test with games)
+
         # Allow unprivileged users to bind ports below 1024
         "net.ipv4.ip_unprivileged_port_start" = 0;
 
