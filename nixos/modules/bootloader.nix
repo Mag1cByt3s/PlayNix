@@ -52,6 +52,9 @@
 
           # sched-ext class for LAVD/SCX support
           SCHED_CLASS_EXT = yes;
+
+          # Enable NTSync for Wine/Proton compatibility/performance
+          NTSYNC = yes;
         };
         ignoreConfigErrors = true;  # Skip minor config warnings during build
       };

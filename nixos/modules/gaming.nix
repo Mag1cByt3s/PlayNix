@@ -56,5 +56,8 @@ in {
 
   environment.sessionVariables = {
     STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
+    WINENTSYNC = "1";  # Enable ntsync for best compatibility/performance
+    WINEESYNC = "0";   # Disable esync to avoid conflicts
+    WINEFSYNC = "0";   # Disable fsync to avoid conflicts
   };
 }
