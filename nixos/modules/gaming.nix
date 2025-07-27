@@ -51,6 +51,18 @@ in {
   # Enable GameMode
   programs.gamemode = {
     enable = true;
+    enableRenice = true;
+    settings = {
+      general = {
+        softrealtime = "auto";  # Enables SCHED_RR for low latency
+        renice = 15;  # Higher priority for game processes
+      };
+      gpu = {
+        apply_gpu_optimisations = "accept-responsibility";  # Allow GPU tweaks
+        gpu_device = 0;
+        amd_performance_level = "high";  # Boost clocks
+      };
+    };
   };
 
   # see https://github.com/fufexan/nix-gaming/#pipewire-low-latency
