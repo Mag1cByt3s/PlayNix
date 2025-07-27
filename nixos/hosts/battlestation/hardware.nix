@@ -8,7 +8,8 @@
 }: {
   boot.kernelModules = [ 
     "i2c-dev"
-    "i2c-piix4" 
+    "i2c-piix4"
+    "amd_pstate_epp"
   ];
 
   hardware = {

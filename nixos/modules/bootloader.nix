@@ -32,6 +32,7 @@
         "net.ifnames=0"
         "biosdevname=0"
         "pcie_aspm.policy=performance"
+        "amd_pstate=active"
       ];
 
       # Switch to Xanmod kernel
