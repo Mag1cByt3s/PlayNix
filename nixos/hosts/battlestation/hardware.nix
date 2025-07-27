@@ -27,5 +27,9 @@
 
     # enable openrazer
     openrazer.enable = lib.mkForce true;
+
+    # for LACT: it is recommended to enable overdrive mode
+    # see LACT wiki for more information: https://github.com/ilya-zlobintsev/LACT/wiki/Overclocking-(AMD)
+    amdgpu.overdrive.enable = true;
   };
 }

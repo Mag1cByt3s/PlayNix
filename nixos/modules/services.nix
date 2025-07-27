@@ -49,6 +49,9 @@
    # Make nixos boot slightly faster by turning these off during boot
   systemd.services.NetworkManager-wait-online.enable = false;
 
+  # Enable LACT
+  services.lact.enable = true;
+
   # Schedulers from https://wiki.archlinux.org/title/improving_performance
   services.udev.extraRules = ''
     # Needed for ZFS. Otherwise the system can freeze
