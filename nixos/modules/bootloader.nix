@@ -71,7 +71,7 @@
       });
     in pkgs.linuxPackagesFor myCustomXanmod;  # Use pkgs.linuxPackagesFor to generate the full package set
 
-    # Initramfs settings (unchanged)
+    # Initramfs settings
     initrd = {
       # enable stage-1 bootloader
       systemd.enable = true;
@@ -80,19 +80,19 @@
       supportedFilesystems = [ "ext4" ];
     };
 
-    # Enable EXT4 filesystem support (unchanged)
+    # Enable EXT4 filesystem support
     supportedFilesystems = [ "ext4" ];
 
-    # Clear /tmp on boot (unchanged)
+    # Clear /tmp on boot
     tmp.cleanOnBoot = true;
 
-    # Enable Plymouth (unchanged)
+    # Enable Plymouth
     plymouth = {
       enable = true;
       theme = "bgrt";
     };
 
-    # Bootloader settings (unchanged)
+    # Bootloader settings
     loader = {
       systemd-boot.enable = false;
 
@@ -126,7 +126,7 @@
     };
   };
 
-  # Fix bug that bootloader entry name cannot be set via boot.loader.grub.configurationName (unchanged)
+  # Fix bug that bootloader entry name cannot be set via boot.loader.grub.configurationName
   # see: https://github.com/NixOS/nixpkgs/issues/15416
   system.activationScripts.update-grub-menu = {
     text = ''
