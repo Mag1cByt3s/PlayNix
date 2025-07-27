@@ -61,5 +61,8 @@ in {
     WINENTSYNC = "1";  # Enable ntsync for best compatibility/performance
     WINEESYNC = "0";   # Disable esync to avoid conflicts
     WINEFSYNC = "0";   # Disable fsync to avoid conflicts
+    RADV_FORCE_VRS = "1x2";  # Set to 1x2 (or 2x1 as an alternative). This enables Variable Rate Shading in one direction for a good perf boost (~5–15% FPS in demanding games like Cyberpunk 2077) with less shadow quality loss than 2x2. 2x2 is more aggressive but can cause noticeable artifacts in shadows/flat areas
+    RADV_DEBUG = "novrsflatshading";  # Enable this to disable VRS on flat shading, preventing visual bugs. It's recommended when using RADV_FORCE_VRS to avoid artifacts in games with flat-shaded elements (e.g., UI or certain textures).
+    RADV_PERFTEST = "nggc,sam,gpl";   # nggc: Enable Next-Gen Geometry Culling for a slight perf improvement (~1–5% in geometry-heavy scenes) on RX 6000 series;    sam: Force Smart Access Memory (Resizable BAR). This can improve perf (~5–10% in VRAM-bound games) if enabled in your BIOS (check with lspci -v | grep BAR);     gpl: Enable Graphics Pipeline Library for Windows-like shader caching behavior, reducing stutter in games that compile shaders on-the-fly. High load times initially (as it disables traditional caching), but worth it for smoothness in titles like Elden Ring. Requires Mesa 23+ (assume you have it; check glxinfo | grep Mesa).
   };
 }
