@@ -36,28 +36,39 @@
 
     # Custom Xanmod kernel override
     kernelPackages = let
-      myCustomXanmod = chaoticPkgs.linux_xanmod_latest.override {
+      baseXanmod = chaoticPkgs.linux_xanmod_latest.override {
         structuredExtraConfig = with lib.kernel; {
           # 1000 Hz tick rate for better desktop/gaming responsiveness
           HZ = freeform "1000";
           HZ_1000 = yes;
           HZ_250 = no;
 
-          # x86_64-v3 optimizations for your Ryzen 7 5800X (Zen 3)
-          MX86_64_V3 = yes;
+          # Zen 3 optimizations for Ryzen 7 5800X (-march=znver3)
+          MZEN3 = yes;
           GENERIC_CPU = no;
 
           # AMD P-State support (ties into our active mode and EPP=performance)
           X86_AMD_PSTATE = yes;
+          ACPI_CPPC_LIB = yes;  # Required for CPB and full P-State features
 
           # sched-ext class for LAVD/SCX support
           SCHED_CLASS_EXT = yes;
 
           # Enable NTSync for Wine/Proton compatibility/performance
           NTSYNC = yes;
+
+          # Enable full LTO with Clang for maximum optimization
+          LTO_CLANG = yes;
+          LTO_CLANG_FULL = yes;  # Aggressive full LTO (use LTO_CLANG_THIN = yes; for faster builds if needed)
         };
         ignoreConfigErrors = true;  # Skip minor config warnings during build
       };
+      # set custom compile flags
+      myCustomXanmod = baseXanmod.overrideAttrs (old: {
+        stdenv = pkgs.clangStdenv;  # Switch to Clang for LTO support
+        # set custom GCC compiler flags
+        NIX_CFLAGS_COMPILE = (old.NIX_CFLAGS_COMPILE or "") + " -march=native -O3 -pipe";
+      });
     in pkgs.linuxPackagesFor myCustomXanmod;  # Use pkgs.linuxPackagesFor to generate the full package set
 
     # Initramfs settings (unchanged)
