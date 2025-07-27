@@ -4,6 +4,7 @@
   pkgs,
   lib,
   chaotic,
+  chaoticPkgs,
   modulesPath,
   ...
 }: let 
@@ -29,6 +30,7 @@ in {
 
     extraCompatPackages = with pkgs; [
       proton-ge-bin # Enable Proton-GE
+      chaoticPkgs.proton-cachyos_x86_64_v3
     ];
   };
 

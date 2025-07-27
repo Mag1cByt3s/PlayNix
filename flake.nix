@@ -132,6 +132,7 @@
                   inherit inputs;
                   user = "pascal";
                   flakeSrc = self;
+
                   pkgs = import inputs.nixpkgs {
                     system = "x86_64-linux";
                     config.allowUnfree = true;
@@ -139,6 +140,13 @@
                       
                     ];
                   };
+
+                  chaoticPkgs = import inputs.nixpkgs {
+                    inherit system;
+                    overlays = [ inputs.chaotic.overlays.default ];
+                    config.allowUnfree = true;
+                  };
+
                 };
 
                 home-manager.users = {

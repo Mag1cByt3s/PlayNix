@@ -1,6 +1,11 @@
-{ config, lib, pkgs, homePkgs, ... }: 
-
-{
+{ 
+  config,
+  lib,
+  pkgs,
+  homePkgs,
+  chaoticPkgs,
+  ...
+}: {
 # set user packages
   home.packages = with homePkgs; [
     papirus-icon-theme
@@ -26,10 +31,12 @@
     lutris
     heroic
     itch
+    ludusavi
 
     # wine
     winetricks
     wineWow64Packages.waylandFull
     bottles
+    chaoticPkgs.proton-cachyos_x86_64_v3
   ];
 }

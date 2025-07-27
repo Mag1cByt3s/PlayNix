@@ -6,6 +6,7 @@
   config,
   pkgs,
   user,
+  chaoticPkgs,
   ... 
 }: let
   # Clean pkgs for home-manager

@@ -45,10 +45,7 @@
 
     # Programs for file transfer
     ./file-transfer.nix
-
-    # Gaming related programs
-    ./gaming.nix
-
+    
     # Razer programs
     ./razer.nix
   ];
