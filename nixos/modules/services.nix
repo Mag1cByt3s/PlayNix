@@ -2,7 +2,7 @@
 
 {
   # Disable power-profiles-daemon (interferes with cpufreq)
-  services.power-profiles-daemon.enable = false;
+  services.power-profiles-daemon.enable = lib.mkForce false;
 
   # Fwupd settings
   services.fwupd = {

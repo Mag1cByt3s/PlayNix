@@ -20,4 +20,14 @@
         ExecStart = "${pkgs.bash}/bin/bash -c 'for policy in /sys/devices/system/cpu/cpufreq/policy*; do echo performance > $policy/energy_performance_preference; done'";
       };
     };
+
+    # Fallback systemd service to globally enable CPB at boot (since we are not using power-profiles-daemon)
+    systemd.services.enable-cpb = {
+      description = "Enable AMD Core Performance Boost on All Cores";
+      wantedBy = [ "multi-user.target" ];
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "${pkgs.bash}/bin/bash -c 'echo 1 | tee /sys/devices/system/cpu/cpu*/cpufreq/boost'";
+      };
+    };
 }
