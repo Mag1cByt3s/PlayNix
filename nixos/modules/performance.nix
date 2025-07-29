@@ -37,8 +37,9 @@
       scheduler = "scx_lavd";
       # Optional: Customize mode/args for gaming performance
       extraOptions = [
-        "--performance"  # Bias toward low latency (gaming-focused)
-        "--core-compaction"  # Explicitly enable power-saving compaction
+        "--performance"  # Maximum performance mode for highest FPS and smoothness
+        "--slice-max-us" "3000"  # Shorter max slice for better latency and frame times (default 5000; test 2000 if needed)
+        "--preempt-shift" "4"  # More preemption for latency-critical tasks (improves 1% lows; default 6)
       ];
     };
 
