@@ -34,8 +34,8 @@
       "amd_pstate=active"
     ];
 
-    # Custom Xanmod kernel override
-    kernelPackages = chaoticPkgs.linuxPackages_cachyos-lto;
+    # Switch to Zen Kernel
+    kernelPackages = pkgs.linuxPackages_zen;
 
     # Initramfs settings
     initrd = {
