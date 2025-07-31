@@ -20,6 +20,9 @@
 
        # NUR overlay
        inputs.nur.overlays.default
+
+       # Overlay to wrap launchers in order to activate gamemode
+       (import ../overlays/gaming-launchers)
      ];
 
      # Configure your nixpkgs instance
