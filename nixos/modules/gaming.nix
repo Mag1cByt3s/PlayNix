@@ -62,6 +62,10 @@ in {
         gpu_device = 0;
         amd_performance_level = "high";  # Boost clocks
       };
+      custom = {
+        start = "${pkgs.libnotify}/bin/notify-send 'GameMode started'";
+        end = "${pkgs.libnotify}/bin/notify-send 'GameMode ended'";
+      };
     };
   };
 
