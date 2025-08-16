@@ -30,7 +30,7 @@
       "audit=0"
       "net.ifnames=0"
       "biosdevname=0"
-      "pcie_aspm.policy=performance"
+      "pcie_aspm=off"
       "amd_pstate=active"
     ];
 
