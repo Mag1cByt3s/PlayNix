@@ -32,6 +32,7 @@
       "biosdevname=0"
       "pcie_aspm=off"
       "amd_pstate=active"
+      "amdgpu.ppfeaturemask=0xffffffff"   # enable all AMD GPU features including fan control
     ];
 
     # Switch to Zen Kernel

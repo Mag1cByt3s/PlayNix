@@ -54,5 +54,6 @@
     e2fsprogs
     tldr
     sshpass
+    coolercontrol.coolercontrol-liqctld
   ];
 }
