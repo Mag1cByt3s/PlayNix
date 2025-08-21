@@ -33,6 +33,15 @@ in {
       chaoticPkgs.proton-cachyos_x86_64_v3
     ];
 
+    # Load the extest library into Steam, to translate X11 input events to uinput events (e.g. for using Steam Input on Wayland)
+    extest.enable = true;
+
+    # Enable Protontricks
+    protontricks = {
+      enable = true;
+      package = pkgs.protontricks;
+    };
+
     # set steam package overrides
     package = pkgs.steam.override {
       extraEnv = {
