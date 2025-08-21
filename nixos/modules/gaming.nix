@@ -6,6 +6,7 @@
   chaotic,
   chaoticPkgs,
   modulesPath,
+  user,
   ...
 }: let 
   gaming = inputs.nix-gaming;
@@ -23,45 +24,49 @@ in {
   # Enable Steam
   programs.steam = {
     enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
-    gamescopeSession.enable = true; # Enable Gamescope session
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+    localNetworkGameTransfers.openFirewall = true;
+    gamescopeSession.enable = true;
 
     extraCompatPackages = with pkgs; [
-      proton-ge-bin # Enable Proton-GE
+      proton-ge-bin
       chaoticPkgs.proton-cachyos_x86_64_v3
     ];
 
-    # Load the extest library into Steam, to translate X11 input events to uinput events (e.g. for using Steam Input on Wayland)
     extest.enable = true;
 
-    # Enable Protontricks
     protontricks = {
       enable = true;
       package = pkgs.protontricks;
     };
 
-    # set steam package overrides
-    package = pkgs.steam.override {
-      extraEnv = {
-        MANGOHUD = false;
-        OBS_VKCAPTURE = true;
-        RADV_TEX_ANISO = 16;
-        STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
-        WINENTSYNC = "1";  # Enable ntsync for best compatibility/performance
-        WINEESYNC = "0";   # Disable esync to avoid conflicts
-        WINEFSYNC = "0";   # Disable fsync to avoid conflicts
-        RADV_FORCE_VRS = "1x2";  # Set to 1x2 (or 2x1 as an alternative). This enables Variable Rate Shading in one direction for a good perf boost (~5–15% FPS in demanding games like Cyberpunk 2077) with less shadow quality loss than 2x2. 2x2 is more aggressive but can cause noticeable artifacts in shadows/flat areas
-        RADV_DEBUG = "novrsflatshading";  # Enable this to disable VRS on flat shading, preventing visual bugs. It's recommended when using RADV_FORCE_VRS to avoid artifacts in games with flat-shaded elements (e.g., UI or certain textures).
-        RADV_PERFTEST = "nggc,sam,gpl";   # nggc: Enable Next-Gen Geometry Culling for a slight perf improvement (~1–5% in geometry-heavy scenes) on RX 6000 series;    sam: Force Smart Access Memory (Resizable BAR). This can improve perf (~5–10% in VRAM-bound games) if enabled in your BIOS (check with lspci -v | grep BAR);     gpl: Enable Graphics Pipeline Library for Windows-like shader caching behavior, reducing stutter in games that compile shaders on-the-fly. High load times initially (as it disables traditional caching), but worth it for smoothness in titles like Elden Ring. Requires Mesa 23+ (assume you have it; check glxinfo | grep Mesa).
-        DXVK_ASYNC = "1";   # Display frames even if they are not completely rendered. This will reduce stuttering a lot, but it could theoretically trigger anti cheat, even though this never actually happened. Your DXVK version needs to be compatible or patched to use it. Proton-GE, until version 7-44, is compatible. For Non-Steam games you can't use Proton, and need a patched DXVK-Version. For Lutris you need to copy it to ~/.local/share/lutris/runtime/dxvk/, and manually select the version inside Lutris (if you named the folder dxvk-async-1.3, you also need to manually type dxvk-async-1.3 in the field). 
-      };
-      extraLibraries = p: with p; [
-        atk
-      ];
-    };
+    # Use the overlay-wrapped Steam package
+    package = lib.mkDefault (
+      pkgs.steam.override (prev: {
+        extraEnv = {
+          MANGOHUD = "0";
+          OBS_VKCAPTURE = "1";
+          RADV_TEX_ANISO = "16";
+          STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/${user}/.steam/root/compatibilitytools.d";
+          WINENTSYNC = "1";
+          WINEESYNC = "0";
+          WINEFSYNC = "0";
+          RADV_FORCE_VRS = "1x2";
+          RADV_DEBUG = "novrsflatshading";
+          RADV_PERFTEST = "nggc,sam,gpl";
+          DXVK_ASYNC = "1";
+        } // (prev.extraEnv or {});
+
+        extraLibraries = pkgs: (with pkgs; [
+          atk
+          libGLU
+          sdl2-compat
+        ]) ++ (prev.extraLibraries or []);
+      })
+    );
   };
+
 
   # https://nixos.wiki/wiki/Games
   # Adding programs.nix-ld = { enable = true; libraries = pkgs.steam-run.fhsenv.args.multiPkgs pkgs; }; to your configuration to run nearly any binary by including all of the libraries used by Steam. (https://old.reddit.com/r/NixOS/comments/1d1nd9l/walking_through_why_precompiled_hello_world/)
@@ -102,9 +107,9 @@ in {
   services.pipewire.lowLatency.enable = true;
 
   environment.sessionVariables = {
-    MANGOHUD = false;
-    OBS_VKCAPTURE = true;
-    RADV_TEX_ANISO = 16;
+    MANGOHUD = "0";
+    OBS_VKCAPTURE = "1";
+    RADV_TEX_ANISO = "16";
     STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
     WINENTSYNC = "1";  # Enable ntsync for best compatibility/performance
     WINEESYNC = "0";   # Disable esync to avoid conflicts

@@ -34,6 +34,7 @@ in {
     ./modules/xdg.nix
     ./modules/ssh-agent.nix
     ./modules/packages.nix
+    ./modules/gamemode.nix
   ];
 
   # Pass homePkgs to all imported modules

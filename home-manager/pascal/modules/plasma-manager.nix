@@ -77,7 +77,7 @@
                   "applications:org.telegram.desktop.desktop"
                   "applications:vesktop.desktop"
                   "applications:codium.desktop"
-                  "applications:steam.desktop"
+                  "applications:steam-gamemode.desktop"
                   "applications:com.heroicgameslauncher.hgl.desktop"
                   "applications:net.lutris.Lutris.desktop"
                   "applications:itch.desktop"
