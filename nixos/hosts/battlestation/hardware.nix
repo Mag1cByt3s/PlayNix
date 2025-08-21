@@ -32,4 +32,8 @@
     # see LACT wiki for more information: https://github.com/ilya-zlobintsev/LACT/wiki/Overclocking-(AMD)
     amdgpu.overdrive.enable = true;
   };
+
+  # enable CoolerControl
+  # https://docs.coolercontrol.org/installation/nix.html
+  programs.coolercontrol.enable = true;
 }
